@@ -69,6 +69,14 @@ export * from "./modules/CameraAnimation/CameraAnimation.js";
 
 export * from "./modules/loader/2.0/OctreeLoader.js";
 
+// for Reality plugin
+export * from "./viewer/sidebar.js"
+export * from "./exporter/LASExporter.js"
+export * from "./exporter/GeoJSONExporter.js"
+export * from "./exporter/DXFExporter.js"
+export * from "./viewer/PropertyPanels/PropertiesPanel.js"
+export * from "./navigation/InputHandler.js"
+
 export {OrbitControls} from "./navigation/OrbitControls.js";
 export {FirstPersonControls} from "./navigation/FirstPersonControls.js";
 export {EarthControls} from "./navigation/EarthControls.js";
