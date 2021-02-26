@@ -1,6 +1,5 @@
-
 import * as THREE from "../../libs/three.js/build/three.module.js";
-import {ClipTask, ClipMethod, CameraMode, LengthUnits, ElevationGradientRepeat} from "../defines.js";
+import {CameraMode, ClipMethod, ClipTask, ElevationGradientRepeat, LengthUnits} from "../defines.js";
 import {Renderer} from "../PotreeRenderer.js";
 import {PotreeRenderer} from "./PotreeRenderer.js";
 import {EDLRenderer} from "./EDLRenderer.js";
@@ -29,9 +28,9 @@ import {FirstPersonControls} from "../navigation/FirstPersonControls.js";
 import {EarthControls} from "../navigation/EarthControls.js";
 import {DeviceOrientationControls} from "../navigation/DeviceOrientationControls.js";
 import {VRControls} from "../navigation/VRControls.js";
-import { EventDispatcher } from "../EventDispatcher.js";
-import { ClassificationScheme } from "../materials/ClassificationScheme.js";
-import { VRButton } from '../../libs/three.js/extra/VRButton.js';
+import {EventDispatcher} from "../EventDispatcher.js";
+import {ClassificationScheme} from "../materials/ClassificationScheme.js";
+import {VRButton} from '../../libs/three.js/extra/VRButton.js';
 
 import JSON5 from "../../libs/json5-2.1.3/json5.mjs";
 
@@ -471,9 +470,9 @@ export class Viewer extends EventDispatcher{
 			this.skybox = Utils.loadSkybox(new URL(Potree.resourcePath + '/textures/skybox2/').href);
 		}
 
-        if(bg === "mars"){
-            this.skybox = Utils.loadSkybox(new URL(Potree.resourcePath + '/textures/skybox-mars/').href);
-        }
+        // if(bg === "mars"){
+        //     this.skybox = Utils.loadSkybox(new URL(Potree.resourcePath + '/textures/skybox/').href);
+        // }
 
 		this.background = bg;
 		this.dispatchEvent({'type': 'background_changed', 'viewer': this});
@@ -1940,7 +1939,7 @@ export class Viewer extends EventDispatcher{
 		let makeCam = this.vrControls.getCamera.bind(this.vrControls);
 
 		{ // clear framebuffer
-			if(viewer.background === "skybox"){
+			if(viewer.background === "skybox" || viewer.background === "mars"){
 				renderer.setClearColor(0xff0000, 1);
 			}else if(viewer.background === "gradient"){
 				renderer.setClearColor(0x112233, 1);
@@ -1956,7 +1955,7 @@ export class Viewer extends EventDispatcher{
 		}
 
 		// render background
-		if(this.background === "skybox"){
+		if(this.background === "skybox" || this.background === "mars"){
 			let {skybox} = this;
 
 			let cam = makeCam();
