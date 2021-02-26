@@ -36,6 +36,26 @@ export class NodeLoader{
 
 			let urlOctree = `${this.url}/../octree.bin`;
 
+            /**
+             * S3 file loading capability
+             */
+            let queryStringIndex = this.url.indexOf('?');
+            if (queryStringIndex > 0) {
+                // has query string => is signed URL
+                let viewerPathIndex = this.url.indexOf('viewer/');
+                let path = this.url.substring(viewerPathIndex, queryStringIndex);
+                let binaryPath = '';
+                if (path.indexOf('metadata.json') > 0) {
+                    binaryPath = path.substring(0, path.lastIndexOf('metadata.json')) + 'octree.bin';
+                }
+
+                // generate S3 signed url with path
+                urlOctree = window.getDataFromStorage(binaryPath);
+            }
+            /**
+             * S3 end
+             */
+
 			let first = byteOffset;
 			let last = byteOffset + byteSize - 1n;
 
@@ -254,6 +274,9 @@ export class NodeLoader{
             // generate S3 signed url with path
             hierarchyPath = window.getDataFromStorage(binaryPath);
         }
+        /**
+         * S3 end
+         */
 
 		let first = hierarchyByteOffset;
 		let last = first + hierarchyByteSize - 1n;
