@@ -331,8 +331,9 @@ export class Viewer extends EventDispatcher{
 	}
 
 	onCrash(error){
+        window.dispatchEvent(new Event('viewer-crashed'));
 
-		$(this.renderArea).empty();
+        $(this.renderArea).empty();
 
 		if ($(this.renderArea).find('#potree_failpage').length === 0) {
 			let elFailPage = $(`
