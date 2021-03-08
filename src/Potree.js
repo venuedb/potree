@@ -76,6 +76,9 @@ export * from "./exporter/GeoJSONExporter.js"
 export * from "./exporter/DXFExporter.js"
 export * from "./viewer/PropertyPanels/PropertiesPanel.js"
 export * from "./navigation/InputHandler.js"
+export * from "./viewer/map.js"
+export * from "./viewer/profile"
+export * from "./utils.js"
 
 export {OrbitControls} from "./navigation/OrbitControls.js";
 export {FirstPersonControls} from "./navigation/FirstPersonControls.js";
